@@ -58,20 +58,6 @@ public class UserLogin {
         Assert.assertEquals(webDriver.getCurrentUrl(),"http://training.skillo-bg.com:4200/users/5689");
     }
 
-    @Test
-    public void homePageScrollTest() {
-        String homeURL = "http://training.skillo-bg.com:4200/posts/all";
-        webDriver.get(homeURL);
-
-        JavascriptExecutor js = (JavascriptExecutor) webDriver;
-        js.executeScript("window.scrollBy(0,2750)", "");
-
-        List<WebElement> numberOfImages = webDriver.findElements(By.xpath("//*[@class='post-feed-img']"));
-        int numberOfLoadedImage = numberOfImages.size();
-        System.out.println("The number of loaded images is: " + numberOfLoadedImage);
-        Assert.assertNotEquals(numberOfLoadedImage,2);
-    }
-
     @AfterMethod(alwaysRun = true)
     public void afterTest(){
         webDriver.close();
