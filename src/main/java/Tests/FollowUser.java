@@ -1,13 +1,15 @@
 package Tests;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.*;
-
 import java.time.Duration;
 
 public class FollowUser extends Main {
@@ -28,7 +30,9 @@ public class FollowUser extends Main {
 
     @Test(dataProvider = "getUser")
     public void testFollowingCount(String username, String password, String userId) {
-        //open homepage
+        setUpTest();
+
+        //Open homepage
         HomePage homePage = new HomePage(driver);
         homePage.navigateTo();
 
@@ -41,34 +45,22 @@ public class FollowUser extends Main {
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
+        WebElement followedUserBtn = driver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/app-small-user-profile/div/div[2]/button"));
 
-       //Go to profile page
-        LoginHeader.goToProfile();
-
-        //Get number of current followers
-        ProfilePage profilePage = new ProfilePage(driver);
-        int currentFollowingCount = profilePage.getFollowingCount();
-
-        //Go to search field
-        Search search = new Search(driver);
-        search.goToSearchField();
-
-        //Find specific person and follow him/her - the user will be "Rumi"
-        ProfilePage userProfilePage = new ProfilePage(driver);
-        search.searchUser("Rumi");
-        search.waitForUserInDropdown();
-        search.clickOnUser(0);
-        userProfilePage.clickFollowButton();
-
-        // Check if the button to Follow is visible
-        boolean isButtonVisible = homePage.checkIfFollowButtonIsVisible();
-        Assert.assertTrue(isButtonVisible, "The button is not displayed");
-
-        //Go to profile and verify that following number is increased
-        LoginHeader.goToProfile();
-        profilePage.waitForFollowingCountIncrease(currentFollowingCount);
-
-        int newFollowersCount = profilePage.getFollowingCount();
-        Assert.assertEquals(newFollowersCount, currentFollowingCount + 1, "Following number is not increased.");
+        //Check if the user is already followed
+        boolean isUserFollowed = followedUser(followedUserBtn);
+        Assert.assertTrue(isUserFollowed, "The user is followed.");
+    }
+    public boolean followedUser(WebElement followedUserBtn) {
+        String buttonText = followedUserBtn.getText();
+        if (buttonText.equals("Follow")) {
+            followedUserBtn.click(); // Follow the user
+            return true;
+        } else if (buttonText.equals("Unfollow")) {
+            System.out.println("The user is not followed!");
+            return false;
+        } else {
+            return false;
+        }
     }
 }

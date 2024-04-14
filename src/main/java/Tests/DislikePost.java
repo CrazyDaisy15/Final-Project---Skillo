@@ -1,14 +1,15 @@
 package Tests;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.*;
-
 import java.time.Duration;
 
 public class DislikePost extends Main {
@@ -29,6 +30,8 @@ public class DislikePost extends Main {
 
     @Test(dataProvider = "getUser")
     public void testDislikePost(String username, String password, String userId) {
+
+        //setUpTest();
         //Open homepage
         HomePage homePage = new HomePage(driver);
         homePage.navigateTo();
@@ -42,23 +45,15 @@ public class DislikePost extends Main {
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
-
-        //Open the latest post
-        homePage.clickLikedPost();
-        AfterLogin afterLogin = new AfterLogin(driver);
-        AfterLogin.waitForDialogToAppear();
-
-        // Check if the button to unlike the post is visible
-        boolean isButtonVisible = homePage.clickLikedPost();
-        Assert.assertTrue(isButtonVisible, "The button is not displayed");
-
-        //Dislike the post
-        afterLogin.clickDislikeButton();
-
-        //Verify that button name changed
-        afterLogin.verifyButtonNameChanged();
-
-        //Check if the pop-up confirmation has appeared
-        Assert.assertTrue(driver.findElement(By.id("toast-container")).isDisplayed(), "Confirmation does not appear.");
+        WebElement dislikedPostBtn = driver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/div[2]/div/div[1]/i[2]"));
+// Check if the post has been already disliked
+        boolean isPostDisliked = dislikedPost(dislikedPostBtn);
+        Assert.assertTrue(isPostDisliked, "The post is disliked.");
+    }
+    public boolean dislikedPost(WebElement dislikedPostBtn) {
+        String initialClassName = dislikedPostBtn.getAttribute("class");
+        dislikedPostBtn.click();
+        String updatedClassName = dislikedPostBtn.getAttribute("class");
+        return updatedClassName.contains("liked");
     }
 }

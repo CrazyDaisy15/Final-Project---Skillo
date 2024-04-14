@@ -18,10 +18,10 @@ public class AfterLogin {
     @FindBy(tagName = "app-post-modal")
     WebElement modalDialog;
 
-    @FindBy(class = "far fa-heart fa-2x")
+    @FindBy(className = "far fa-heart fa-2x")
     WebElement likeButton;
 
-    @FindBy(class = "ml-4 far fa-thumbs-down fa-2x")
+    @FindBy(className = "ml-4 far fa-thumbs-down fa-2x")
     WebElement dislikeButton;
 
 
@@ -33,6 +33,11 @@ public class AfterLogin {
     public void waitForDialogToAppear() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOf(modalDialog));
+    }
+
+    // Method to click the WebElement
+    public void clickElement(WebElement element) {
+        element.click();
     }
 
     public void clickLikeButton() {

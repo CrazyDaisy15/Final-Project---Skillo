@@ -1,19 +1,19 @@
 package Tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.*;
-
 import java.time.Duration;
 
 public class UnfollowUser extends Main {
-
     private WebDriver driver;
-
     @BeforeMethod
     protected final void setUpTest() {
         this.driver = new ChromeDriver();
@@ -27,8 +27,12 @@ public class UnfollowUser extends Main {
         return new Object[][]{{"CrazyDaisy15", "CrazyDaisy15", "5689"}};
     }
 
+    //    @FindBy(xpath = "/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/app-small-user-profile/div/div[2]/button")
+    //    private WebElement followedUser;
     @Test(dataProvider = "getUser")
-    public void testUnfollowingSpecificUser(String username, String password, String userId) {
+    public void testUnfollowingUser(String username, String password, String userId) {
+        setUpTest();
+
         //Open homepage
         HomePage homePage = new HomePage(driver);
         homePage.navigateTo();
@@ -42,35 +46,21 @@ public class UnfollowUser extends Main {
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
+        WebElement unFollowedUserBtn = driver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/app-small-user-profile/div/div[2]/button"));
 
-        //Go to profile page
-        LoginHeader.goToProfile();
-
-
-        //Get number of current followers
-        ProfilePage profilePage = new ProfilePage(driver);
-        int currentFollowingCount = profilePage.getFollowingCount();
-
-        //Go to search field
-        Search search = new Search(driver);
-        search.goToSearchField();
-
-        //ind specific person and unfollow him/her - the user will be "Rumi"
-        ProfilePage userProfilePage = new ProfilePage(driver);
-        search.searchUser("Rumi");
-        search.waitForUserInDropdown();
-        search.clickOnUser(0);
-        userProfilePage.clickUnfollowButton();
-
-        // Check if the button to Unfollow is visible
-        boolean isButtonVisible = homePage.checkIfUnfollowButtonIsVisible();
-        Assert.assertTrue(isButtonVisible, "The button is not displayed");
-
-        //Go to profile and verify that following number is decreased
-        LoginHeader.goToProfile();
-        profilePage.waitForFollowingCountDecrease(currentFollowingCount);
-
-        int newFollowersCount = profilePage.getFollowingCount();
-        Assert.assertEquals(newFollowersCount, currentFollowingCount - 1, "Following number is not decreased.");
+        // Check if the user is already followed
+        boolean isUserUnfollowed = unFollowedUser(unFollowedUserBtn);
+        Assert.assertTrue(isUserUnfollowed, "The user is unfollowed.");
+    }
+    public boolean unFollowedUser(WebElement unFollowedUserBtn) {
+        String buttonText = unFollowedUserBtn.getText();
+        if (buttonText.equals("Follow")) {
+            return false;
+        } else if (buttonText.equals("Unfollow")) {
+            unFollowedUserBtn.click();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

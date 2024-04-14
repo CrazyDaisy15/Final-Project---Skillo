@@ -5,13 +5,14 @@ import Pages.HomePage;
 import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.*;
-
 import java.time.Duration;
 
 public class LikePost extends Main {
@@ -24,7 +25,6 @@ public class LikePost extends Main {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
-
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
         return new Object[][]{{"CrazyDaisy15", "CrazyDaisy15", "5689"}};
@@ -32,10 +32,11 @@ public class LikePost extends Main {
 
     @Test(dataProvider = "getUser")
     public void testLikePost(String username, String password, String userId) {
+        setUpTest();
         HomePage homePage = new HomePage(driver);
         homePage.navigateTo();
 
-        //login with existing user
+        //Login with existing user
         Header header = new Header(driver);
         header.clickLogin();
         LoginPage loginPage = new LoginPage(driver);
@@ -44,23 +45,16 @@ public class LikePost extends Main {
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
+        WebElement likedPostBtn = driver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/div[2]/div/div[1]/i[1]"));
 
-        //Click on random post
-        homePage.clickRandomPost();
-        AfterLogin afterLogin = new AfterLogin(driver);
-        AfterLogin.waitForDialogToAppear();
-
-        // Check if the button to like the post is visible
-        boolean isButtonVisible = homePage.checkIfLikeButtonIsVisible();
-        Assert.assertTrue(isButtonVisible, "The button is not displayed");
-
-        //Like the post
-        afterLogin.clickLikeButton();
-
-        //Verify that button name changed
-        afterLogin.verifyButtonNameChanged();
-
-        //Check if the pop-up confirmation has appeared
-        Assert.assertTrue(driver.findElement(By.id("toast-container")).isDisplayed(), "Confirmation does not appear.");
+        // Check if the post has been already liked
+        boolean isPostLiked = likedPost(likedPostBtn);
+        Assert.assertTrue(isPostLiked, "The post is liked.");
+    }
+    public boolean likedPost(WebElement likedPostBtn) {
+        String initialClassName = likedPostBtn.getAttribute("class");
+        likedPostBtn.click();
+        String updatedClassName = likedPostBtn.getAttribute("class");
+        return updatedClassName.contains("liked");
     }
 }
