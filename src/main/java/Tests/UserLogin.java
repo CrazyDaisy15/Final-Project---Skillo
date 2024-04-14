@@ -39,8 +39,7 @@ public class UserLogin {
 
         WebElement usernameTextField = webDriver.findElement(By.id("defaultLoginFormUsername"));
         usernameTextField.sendKeys("CrazyDaisy15");
-        //String typedUserName = usernameTextField.getText();
-        //Assert.assertEquals(typedUserName,"p0li0m");
+
 
         WebElement passwordTestField = webDriver.findElement(By.xpath("//form/input[@id='defaultLoginFormPassword']"));
         passwordTestField.sendKeys("CrazyDaisy15");
