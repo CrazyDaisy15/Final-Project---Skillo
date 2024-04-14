@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/HP/IdeaProjects/FinalProjectTestingSkilloWebsite">
+        <classes>
+            <class name="Tests.DislikePost">
+                <methods>
+                    <include name="testDislikePost"/>
+                </methods>
+            </class>
+            <class name="Tests.FollowUser">
+                <methods>
+                    <include name="testFollowingCount"/>
+                </methods>
+            </class>
+            <class name="Tests.LikePost">
+                <methods>
+                    <include name="testLikePost"/>
+                </methods>
+            </class>
+            <class name="Tests.UnfollowUser">
+                <methods>
+                    <include name="testUnfollowingSpecificUser"/>
+                </methods>
+            </class>
+            <class name="Tests.UserLogin">
+                <methods>
+                    <include name="homePageScrollTest"/>
+                </methods>
+            </class>
+            <class name="Tests.UserLogout">
+                <methods>
+                    <include name="testUnfollowingSpecificUser"/>
+                    <include name="clickLogout"/>
+                    <include name="isUserLoggedOut"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
