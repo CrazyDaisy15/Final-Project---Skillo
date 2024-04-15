@@ -27,8 +27,6 @@ public class UnfollowUser extends Main {
         return new Object[][]{{"CrazyDaisy15", "CrazyDaisy15", "5689"}};
     }
 
-    //    @FindBy(xpath = "/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/app-small-user-profile/div/div[2]/button")
-    //    private WebElement followedUser;
     @Test(dataProvider = "getUser")
     public void testUnfollowingUser(String username, String password, String userId) {
         setUpTest();
@@ -52,6 +50,7 @@ public class UnfollowUser extends Main {
         boolean isUserUnfollowed = unFollowedUser(unFollowedUserBtn);
         Assert.assertTrue(isUserUnfollowed, "The user is unfollowed.");
     }
+
     public boolean unFollowedUser(WebElement unFollowedUserBtn) {
         String buttonText = unFollowedUserBtn.getText();
         if (buttonText.equals("Follow")) {

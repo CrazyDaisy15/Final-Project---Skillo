@@ -1,5 +1,6 @@
 package Tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,11 +37,11 @@ public class UserLogout {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(className = "fas fa-sign-out-alt fa-lg")
+    @FindBy
     private WebElement logoutButton;
 
     @Test(dataProvider = "getUser")
-    public void testUnfollowingSpecificUser(String username, String password, String userId) {
+    public void testUserLogout(String username, String password, String userId) {
 
         //Open homepage
         HomePage homePage = new HomePage(driver);
@@ -55,25 +56,11 @@ public class UserLogout {
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
+        WebElement logoutButton = driver.findElement(By.xpath( "//*[@class='nav-link']//*[@class='fas fa-sign-out-alt fa-lg']"));
+                   logoutButton.click();
 
-//        homePage.verifyUrl();
-//
-//        boolean isSignInTextPresent = loginPage.checkSignInTextIsDisplayed();
-//        Assert.assertTrue(isSignInTextPresent, "The Sign In text is not visible");
-//
-//        boolean isProfileSectionPresent = Header.checkProfileSectionIsVisible();
-//        Assert.assertTrue(isProfileSectionPresent, "Profile Section is not visible");
-//
-//        LoginHeader.clickTheLogoutButton();
-//
-//        public void clickLogout() {
-//            logoutButton.click();
-//            Assert.assertTrue(isUserLoggedOut(), "Successful logout!");
-//        }
-//
-//        private boolean isUserLoggedOut() {
-//            boolean isLoginButtonPresent = Header.verifyTheLogInButtonIsVisible();
-//            Assert.assertTrue(isLoginButtonPresent, "Login button is not visible");
-//        }
+        //Check if the user is logged out
+        boolean isUserLoggedOut = logoutButton.isSelected();
+        Assert.assertTrue(isUserLoggedOut, "The user is logged out.");
     }
 }
