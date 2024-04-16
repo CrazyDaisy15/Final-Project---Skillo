@@ -1,11 +1,14 @@
 package Tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -16,6 +19,7 @@ import java.time.Duration;
 
 public class UserLogout {
     private WebDriver driver;
+
     @BeforeMethod
     protected final void setUpTest() {
         this.driver = new ChromeDriver();
@@ -56,11 +60,25 @@ public class UserLogout {
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
-        WebElement logoutButton = driver.findElement(By.xpath( "//*[@class='nav-link']//*[@class='fas fa-sign-out-alt fa-lg']"));
-                   logoutButton.click();
 
-        //Check if the user is logged out
-        boolean isUserLoggedOut = logoutButton.isSelected();
-        Assert.assertTrue(isUserLoggedOut, "The user is logged out.");
+        try {
+            WebElement logoutButton = driver.findElement(By.xpath("//*[@class='nav-link']//*[@class='fas fa-sign-out-alt fa-lg']"));
+            logoutButton.click();
+            Assert.fail("Logout button should not be present.");
+        } catch (NoSuchElementException e) {
+            System.out.println("Logout button is missing.");
+
+            //Check if the user is logged out
+            boolean isUserLoggedOut = logoutButton.isSelected();
+            Assert.assertTrue(isUserLoggedOut, "The user is logged out.");
+
+            Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
+            header.clickProfile();
+
+            String logoutMessageText = Logout.getMessageModalText();
+            Assert.assertEquals(logoutMessageText, "Successful logout!");
+
+            Assert.assertTrue(loginPage.isUrlLoaded(), "The Login page URL is not loaded");
+        }
     }
 }

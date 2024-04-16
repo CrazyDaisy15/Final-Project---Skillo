@@ -46,7 +46,8 @@ public class DislikePost extends Main {
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
         WebElement dislikedPostBtn = driver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/div[2]/div/div[1]/i[2]"));
-// Check if the post has been already disliked
+
+        // Check if the post has been already disliked
         boolean isPostDisliked = dislikedPost(dislikedPostBtn);
         Assert.assertTrue(isPostDisliked, "The post is disliked.");
     }

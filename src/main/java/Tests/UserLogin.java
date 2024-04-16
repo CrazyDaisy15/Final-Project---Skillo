@@ -40,7 +40,6 @@ public class UserLogin {
         WebElement usernameTextField = webDriver.findElement(By.id("defaultLoginFormUsername"));
         usernameTextField.sendKeys("CrazyDaisy15");
 
-
         WebElement passwordTestField = webDriver.findElement(By.xpath("//form/input[@id='defaultLoginFormPassword']"));
         passwordTestField.sendKeys("CrazyDaisy15");
 
