@@ -52,16 +52,16 @@ public class UserLogout {
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
-        boolean isUserLoggedIn = HomePage.isUrlLoaded();
-        Assert.assertTrue(isUserLoggedIn, "The user is NOT logged in."); {
+        // boolean isUserLoggedIn = HomePage.isUrlLoaded();
+        Assert.assertTrue(homePage.isUrlLoaded(), "The user is NOT logged in."); {
         }
 
-        UserLogout.clickLogoutButton;
+        logout.clickLogoutButton();
 
         // Check if the user is logged out
-        boolean isUserLoggedOut = LoginPage.isUrlLoaded();
-        Assert.assertTrue(isUserLoggedOut, "The user is NOT logged out.");
-        String logoutMessageText = Logout.getMessageModalText();
+        // boolean isUserLoggedOut = LoginPage.isUrlLoaded();
+        Assert.assertTrue(loginPage.isUrlLoaded(), "The user is NOT logged out.");
+        String logoutMessageText = logout.getMessageModalText();
         Assert.assertEquals(logoutMessageText, "Successful logout!");
     }
 }
