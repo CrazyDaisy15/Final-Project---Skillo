@@ -26,10 +26,11 @@ public class Main{
     public void setupDriver() throws IOException {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        this.driver = new ChromeDriver(options);
+        this.driver.manage().window().maximize();
+        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        this.driver.get("http://training.skillo-bg.com:4200/posts/all");
     }
 
     @AfterMethod

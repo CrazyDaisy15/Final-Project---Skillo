@@ -24,8 +24,9 @@ public class UserLogout {
     protected final void setUpTest() {
         this.driver = new ChromeDriver();
         this.driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        this.driver.get("http://training.skillo-bg.com:4200/posts/all");
     }
 
     @DataProvider(name = "getUser")
@@ -33,52 +34,34 @@ public class UserLogout {
         return new Object[][]{{"CrazyDaisy15", "CrazyDaisy15", "5689"}};
     }
 
-    @BeforeClass
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", "/Downloads/chrome-mac-arm64/chromedriver");
-        driver = new ChromeDriver();
-        driver.get("http://training.skillo-bg.com:4200/posts/all");
-        PageFactory.initElements(driver, this);
-    }
-
-    @FindBy
-    private WebElement logoutButton;
-
     @Test(dataProvider = "getUser")
     public void testUserLogout(String username, String password, String userId) {
+        //Initialize pages
+        HomePage homePage = new HomePage(driver);
+        Header header = new Header(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        Logout logout = new Logout(driver);
 
         //Open homepage
-        HomePage homePage = new HomePage(driver);
         homePage.navigateTo();
 
-        //Login with existing user
-        Header header = new Header(driver);
+        // Login with existing user
         header.clickLogin();
-        LoginPage loginPage = new LoginPage(driver);
         loginPage.isUrlLoaded();
         loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
-
-        try {
-            WebElement logoutButton = driver.findElement(By.xpath("//*[@class='nav-link']//*[@class='fas fa-sign-out-alt fa-lg']"));
-            logoutButton.click();
-            Assert.fail("Logout button should not be present.");
-        } catch (NoSuchElementException e) {
-            System.out.println("Logout button is missing.");
-
-            //Check if the user is logged out
-            boolean isUserLoggedOut = logoutButton.isSelected();
-            Assert.assertTrue(isUserLoggedOut, "The user is logged out.");
-
-            Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is not correct!");
-            header.clickProfile();
-
-            String logoutMessageText = Logout.getMessageModalText();
-            Assert.assertEquals(logoutMessageText, "Successful logout!");
-
-            Assert.assertTrue(loginPage.isUrlLoaded(), "The Login page URL is not loaded");
+        boolean isUserLoggedIn = HomePage.isUrlLoaded();
+        Assert.assertTrue(isUserLoggedIn, "The user is NOT logged in."); {
         }
+
+        Logout.clickLogoutButton;
+
+        // Check if the user is logged out
+        boolean isUserLoggedOut = LoginPage.isUrlLoaded();
+        Assert.assertTrue(isUserLoggedOut, "The user is NOT logged out.");
+        String logoutMessageText = Logout.getMessageModalText();
+        Assert.assertEquals(logoutMessageText, "Successful logout!");
     }
 }

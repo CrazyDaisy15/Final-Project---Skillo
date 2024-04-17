@@ -10,13 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Header {
     private final WebDriver webDriver;
-    @FindBy(
-            id = "nav-link-login"
-    )
+    @FindBy(id = "nav-link-login")
     private WebElement loginLink;
-    @FindBy(
-            id = "nav-link-profile"
-    )
+    @FindBy(id = "nav-link-profile")
     private WebElement profilePageLink;
 
     public Header(WebDriver driver) {

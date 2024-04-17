@@ -19,8 +19,9 @@ public class FollowUser extends Main {
     protected final void setUpTest() {
         this.driver = new ChromeDriver();
         this.driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        this.driver.get("http://training.skillo-bg.com:4200/posts/all");
     }
 
     @DataProvider(name = "getUser")
@@ -34,12 +35,13 @@ public class FollowUser extends Main {
 
         //Open homepage
         HomePage homePage = new HomePage(driver);
-        homePage.navigateTo();
+        Header header = new Header(driver);
+        LoginPage loginPage = new LoginPage(driver);
 
         //Login with existing user
-        Header header = new Header(driver);
+        Header Header = new Header(driver);
         header.clickLogin();
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage LoginPage = new LoginPage(driver);
         loginPage.isUrlLoaded();
         loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);
