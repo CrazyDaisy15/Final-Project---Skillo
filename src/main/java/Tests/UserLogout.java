@@ -56,7 +56,7 @@ public class UserLogout {
         Assert.assertTrue(isUserLoggedIn, "The user is NOT logged in."); {
         }
 
-        Logout.clickLogoutButton;
+        UserLogout.clickLogoutButton;
 
         // Check if the user is logged out
         boolean isUserLoggedOut = LoginPage.isUrlLoaded();

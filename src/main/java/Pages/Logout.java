@@ -22,7 +22,8 @@ public class Logout {
 
     public void clickLogoutButton() {
         WebDriverWait wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
+        WebElement logoutButton = wait.until(ExpectedConditions.visibilityOf(driver.findElement
+                (By.xpath("//*[@class='nav-link']//*[@class='fas fa-sign-out-alt fa-lg']"))));
         logoutButton.click();
     }
 
