@@ -22,16 +22,16 @@ public class Main{
     public static final String SCREENSHOT_DIR = TEST_RESOURCES_DIR.concat("screenshots" + File.separator);
     public static final String REPORTS_DIR = TEST_RESOURCES_DIR.concat("reports" + File.separator);
 
-    @BeforeMethod
+    /* @BeforeMethod
     public void setupDriver() throws IOException {
-        WebDriverManager.chromedriver().setup();
+       WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         this.driver = new ChromeDriver(options);
         this.driver.manage().window().maximize();
         this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
         this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         this.driver.get("http://training.skillo-bg.com:4200/posts/all");
-    }
+    } */
 
     @AfterMethod
     public void cleanUp(ITestResult testResult) {

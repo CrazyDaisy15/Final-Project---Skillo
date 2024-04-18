@@ -31,7 +31,6 @@ public class Logout {
         //        (By.xpath("//*[@class='nav-link']//*[@class='fas fa-sign-out-alt fa-lg']"))));
        // logoutButton.click();
 
-
     public String getMessageModalText() {
       //  WebElement message = this.driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div"));
       //  WebDriverWait wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
