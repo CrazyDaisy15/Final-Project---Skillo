@@ -3,7 +3,6 @@ package Tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -32,17 +31,14 @@ public class FollowUser extends Main {
 
     @Test(dataProvider = "getUser")
     public void testFollowingCount(String username, String password, String userId) {
-        setUpTest();
 
-        //Open homepage
         HomePage homePage = new HomePage(driver);
         Header header = new Header(driver);
         LoginPage loginPage = new LoginPage(driver);
 
-        //Login with existing user
-        Header Header = new Header(driver);
+        homePage.navigateTo();
+
         header.clickLogin();
-        LoginPage LoginPage = new LoginPage(driver);
         loginPage.isUrlLoaded();
         loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);

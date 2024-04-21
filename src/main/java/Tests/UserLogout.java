@@ -1,7 +1,6 @@
 package Tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -11,7 +10,7 @@ import org.testng.annotations.Test;
 import Pages.*;
 import java.time.Duration;
 
-public class UserLogout {
+public class UserLogout extends Main {
     private WebDriver driver;
 
     @BeforeMethod
@@ -50,7 +49,6 @@ public class UserLogout {
 
         logout.clickLogoutButton();
 
-        // Check if the user is logged out
         // boolean isUserLoggedOut = LoginPage.isUrlLoaded();
         Assert.assertTrue(loginPage.isUrlLoaded(), "The user is NOT logged out.");
         String logoutMessageText = logout.getMessageModalText();

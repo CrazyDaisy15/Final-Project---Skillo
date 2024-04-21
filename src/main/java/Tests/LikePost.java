@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,8 +14,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.*;
 import java.time.Duration;
-
-import static org.testng.Assert.*;
 
 public class LikePost extends Main {
     private WebDriver driver;
@@ -35,7 +32,7 @@ public class LikePost extends Main {
         }
 
         @Test(dataProvider = "getUser")
-        public void testUnfollowingUser(String username, String password, String userId) {
+        public void testLikePost(String username, String password, String userId) {
 
             HomePage homePage = new HomePage(driver);
             Header header = new Header(driver);

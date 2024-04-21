@@ -31,16 +31,13 @@ public class DislikePost extends Main {
     @Test(dataProvider = "getUser")
     public void testDislikePost(String username, String password, String userId) {
 
-        //Open homepage
         HomePage homePage = new HomePage(driver);
         Header header = new Header(driver);
         LoginPage loginPage = new LoginPage(driver);
+
         homePage.navigateTo();
 
-        //Login with existing user
-        Header Header = new Header(driver);
         header.clickLogin();
-        LoginPage LoginPage = new LoginPage(driver);
         loginPage.isUrlLoaded();
         loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);

@@ -31,16 +31,14 @@ public class UnfollowUser extends Main {
 
     @Test(dataProvider = "getUser")
     public void testUnfollowingUser(String username, String password, String userId) {
-        setUpTest();
 
-        //Open homepage
         HomePage homePage = new HomePage(driver);
+        Header header = new Header(driver);
+        LoginPage loginPage = new LoginPage(driver);
+
         homePage.navigateTo();
 
-        //Login with existing user
-        Header header = new Header(driver);
         header.clickLogin();
-        LoginPage loginPage = new LoginPage(driver);
         loginPage.isUrlLoaded();
         loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);
