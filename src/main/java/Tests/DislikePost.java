@@ -3,9 +3,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -32,15 +31,16 @@ public class DislikePost extends Main {
     @Test(dataProvider = "getUser")
     public void testDislikePost(String username, String password, String userId) {
 
-        //setUpTest();
         //Open homepage
         HomePage homePage = new HomePage(driver);
+        Header header = new Header(driver);
+        LoginPage loginPage = new LoginPage(driver);
         homePage.navigateTo();
 
         //Login with existing user
-        Header header = new Header(driver);
+        Header Header = new Header(driver);
         header.clickLogin();
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage LoginPage = new LoginPage(driver);
         loginPage.isUrlLoaded();
         loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);
@@ -57,5 +57,9 @@ public class DislikePost extends Main {
         dislikedPostBtn.click();
         String updatedClassName = dislikedPostBtn.getAttribute("class");
         return updatedClassName.contains("liked");
+    }
+    @AfterMethod(alwaysRun = true)
+    public void afterTest(){
+        this.driver.close();
     }
 }

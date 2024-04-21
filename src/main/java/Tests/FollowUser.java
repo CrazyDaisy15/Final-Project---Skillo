@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -64,5 +65,9 @@ public class FollowUser extends Main {
         } else {
             return false;
         }
+    }
+    @AfterMethod(alwaysRun = true)
+    public void afterTest(){
+        this.driver.close();
     }
 }

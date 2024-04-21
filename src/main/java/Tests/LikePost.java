@@ -16,6 +16,8 @@ import org.testng.annotations.Test;
 import Pages.*;
 import java.time.Duration;
 
+import static org.testng.Assert.*;
+
 public class LikePost extends Main {
     private WebDriver driver;
 
@@ -34,16 +36,14 @@ public class LikePost extends Main {
 
         @Test(dataProvider = "getUser")
         public void testUnfollowingUser(String username, String password, String userId) {
-            setUpTest();
 
-            //Open homepage
             HomePage homePage = new HomePage(driver);
+            Header header = new Header(driver);
+            LoginPage loginPage = new LoginPage(driver);
+
             homePage.navigateTo();
 
-            //Login with existing user
-            Header header = new Header(driver);
             header.clickLogin();
-            LoginPage loginPage = new LoginPage(driver);
             loginPage.isUrlLoaded();
             loginPage.fillInUserName(username);
             loginPage.fillInPassword(password);
@@ -61,4 +61,8 @@ public class LikePost extends Main {
             String updatedClassName = likedPostBtn.getAttribute("class");
             return updatedClassName.contains("liked");
         }
+    @AfterMethod(alwaysRun = true)
+    public void afterTest(){
+        this.driver.close();
+    }
     }
