@@ -11,6 +11,10 @@ import java.time.Duration;
 
 public class LoginHeader {
     private final WebDriver webDriver;
+    public LoginHeader(WebDriver driver) {
+        this.webDriver = driver;
+        PageFactory.initElements(driver, this);
+    }
     private WebDriverWait wait;
     @FindBy(id = "profileLink")
     private WebElement profileLink;
@@ -21,10 +25,6 @@ public class LoginHeader {
     @FindBy(id = "NewPostButton")
     private WebElement newPostButton;
 
-    public LoginHeader(WebDriver driver) {
-        this.webDriver = driver;
-        PageFactory.initElements(driver, this);
-    }
     public void clickHome() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(homeButton));

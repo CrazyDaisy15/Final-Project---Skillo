@@ -11,44 +11,69 @@ import java.time.Duration;
 
 public class AfterLogin {
     private final WebDriver webDriver;
-
-    @FindBy(css = ".container-flud .post-profile-img .post-user")
-    WebElement usernameLink;
-
-    @FindBy(tagName = "app-post-modal")
-    WebElement modalDialog;
-
-    @FindBy(className = "far fa-heart fa-2x")
-    WebElement likeButton;
-
-    @FindBy(className = "ml-4 far fa-thumbs-down fa-2x")
-    WebElement dislikeButton;
-
-
     public AfterLogin(WebDriver driver) {
         this.webDriver = driver;
         PageFactory.initElements(this.webDriver, this);
     }
+
+    @FindBy(className = "app-post-modal")
+    private WebElement modalDialog;
+
+    @FindBy(className = "like")
+    private WebElement likeButton;
+
+    @FindBy(className = "fa-thumbs-down")
+    private WebElement dislikeButton;
+
+    @FindBy(className = "ng-star-inserted")
+    private WebElement followUserBtn;
+
+    @FindBy(className = "btn-primary")
+    private WebElement unfollowUserBtn;
 
     public void waitForDialogToAppear() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOf(modalDialog));
     }
 
-    // Method to click the WebElement
     public void clickElement(WebElement element) {
         element.click();
     }
 
     public void clickLikeButton() {
-        clickElement(likeButton);
+        likeButton.click();
     }
 
     public void clickDislikeButton() {
-        clickElement(dislikeButton);
+        dislikeButton.click();
     }
 
-    public void clickUsernameLink() {
-        clickElement(usernameLink);
+    public void clickFollowUserBtn() {
+        followUserBtn.click();
+
+    }
+    public void clickUnfollowUserBtn() {
+        unfollowUserBtn.click();
+    }
+
+    public boolean isPostLiked() {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOf(likeButton));
+        return true;
+    }
+    public boolean isPostDisliked() {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOf(dislikeButton));
+        return true;
+    }
+    public boolean isUserFollowed() {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOf(followUserBtn));
+        return true;
+    }
+    public boolean isUserUnfollowed() {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOf(unfollowUserBtn));
+        return true;
     }
 }

@@ -1,17 +1,15 @@
 package Pages;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 public class HomePage {
     public static final String HOME_URL = "http://training.skillo-bg.com:4200/posts/all";
     private final WebDriver webDriver;
-    @FindBy(className = "far fa-heart fa-2x")
-    private WebElement dislikedPostElement;
     public HomePage(WebDriver driver) {
         this.webDriver = driver;
+        PageFactory.initElements(driver, this);
     }
     public void navigateTo(){
         this.webDriver.get(HOME_URL);
