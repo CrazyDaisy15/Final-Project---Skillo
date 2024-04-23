@@ -1,4 +1,5 @@
 package Pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,9 +13,9 @@ import java.time.Duration;
 public class Logout {
 
     @FindBy(xpath = "//*[@class='nav-link']//*[@class='fas fa-sign-out-alt fa-lg']")
-           private WebElement logoutButton;
+    private WebElement logoutButton;
 
-   private final WebDriverWait wait;
+    private final WebDriverWait wait;
 
     public Logout(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -28,5 +29,5 @@ public class Logout {
     public String getMessageModalText() {
         WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"toast-container\"]/div")));
         return message.getText();
-}
+    }
 }

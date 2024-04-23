@@ -1,7 +1,6 @@
 package Tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,17 +32,5 @@ public class UnfollowUser extends Main {
 
         Assert.assertTrue(afterLogin.isUserUnfollowed(), "The user is unfollowed.");
         afterLogin.clickUnfollowUserBtn();
-    }
-
-    public boolean unfollowUser(WebElement unFollowedUserBtn) {
-        String buttonText = unFollowedUserBtn.getText();
-        if (buttonText.equals("Follow")) {
-            return false;
-        } else if (buttonText.equals("Unfollow")) {
-            unFollowedUserBtn.click();
-            return true;
-        } else {
-            return false;
-        }
     }
 }

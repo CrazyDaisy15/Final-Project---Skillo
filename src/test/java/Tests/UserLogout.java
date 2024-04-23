@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import Pages.*;
 
 public class UserLogout extends Main {
-
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
         return new Object[][]{{"CrazyDaisy15", "CrazyDaisy15", "5689"}};
