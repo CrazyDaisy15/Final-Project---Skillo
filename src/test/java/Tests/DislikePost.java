@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import Pages.*;
 
 public class DislikePost extends Main {
-    private WebDriver driver;
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
@@ -16,11 +15,11 @@ public class DislikePost extends Main {
 
     @Test(dataProvider = "getUser")
     public void testDislikePost(String username, String password, String userId) {
-
-        HomePage homePage = new HomePage(driver);
-        Header header = new Header(driver);
-        LoginPage loginPage = new LoginPage(driver);
-        AfterLogin afterLogin = new AfterLogin(driver);
+        WebDriver webDriver = super.getWebDriver();
+        HomePage homePage = new HomePage(webDriver);
+        Header header = new Header(webDriver);
+        LoginPage loginPage = new LoginPage(webDriver);
+        AfterLogin afterLogin = new AfterLogin(webDriver);
 
         homePage.navigateTo();
 

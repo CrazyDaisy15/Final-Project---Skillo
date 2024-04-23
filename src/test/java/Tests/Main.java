@@ -25,8 +25,9 @@ public class Main {
     public static final String DOWNLOADS_DIR = TEST_RESOURCES_DIR.concat("download" + File.separator);
     public static final String SCREENSHOTS_DIR = TEST_RESOURCES_DIR.concat("screenshots" + File.separator);
     public static final String REPORTS_DIR = TEST_RESOURCES_DIR.concat("reports" + File.separator);
+    private WebDriver webDriver;
     @BeforeSuite
-    protected final void setupTestSuite() throws IOException{
+    protected final void setupTestSuite() throws IOException {
         cleanDirectory(SCREENSHOTS_DIR);
         cleanDirectory(REPORTS_DIR);
         WebDriverManager.chromedriver().setup();
@@ -38,7 +39,6 @@ public class Main {
         this.driver.manage().window().maximize();
         this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        this.driver.get("http://training.skillo-bg.com:4200/posts/all");
     }
     @AfterMethod
     protected final void tearDownTest(ITestResult testResult){
@@ -62,16 +62,13 @@ public class Main {
 
     private ChromeOptions configChromeOptions(){
         //Create path and setting for download folder
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory",
-                System.getProperty("user.dir").concat("\\").concat(DOWNLOADS_DIR));
+        //Map<String, Object> prefs = new HashMap<>();
+       // prefs.put("download.default_directory",
+          //      System.getProperty("user.dir").concat("\\").concat(DOWNLOADS_DIR));
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        //Set new default download folder
-        chromeOptions.setExperimentalOption("prefs", prefs);
-        //Force the download to be automatic
+        //chromeOptions.setExperimentalOption("prefs", prefs);
         chromeOptions.addArguments("disable-popup-blocking");
-
         return chromeOptions;
     }
 

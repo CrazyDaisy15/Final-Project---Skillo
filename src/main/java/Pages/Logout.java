@@ -26,7 +26,7 @@ public class Logout {
     }
 
     public String getMessageModalText() {
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"toast-container\"]/div")));
+        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='toast-container']/div")));
         return message.getText();
 }
 }

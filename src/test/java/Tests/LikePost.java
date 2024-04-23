@@ -4,13 +4,14 @@ import Pages.AfterLogin;
 import Pages.Header;
 import Pages.HomePage;
 import Pages.LoginPage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LikePost extends Main {
-    //private WebDriver driver;
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
@@ -19,11 +20,11 @@ public class LikePost extends Main {
 
     @Test(dataProvider = "getUser")
     public void testLikePost(String username, String password, String userId) {
-
-        HomePage homePage = new HomePage(driver);
-        Header header = new Header(driver);
-        LoginPage loginPage = new LoginPage(driver);
-        AfterLogin afterLogin = new AfterLogin(driver);
+        WebDriver webDriver = super.getWebDriver();
+        HomePage homePage = new HomePage(webDriver);
+        Header header = new Header(webDriver);
+        LoginPage loginPage = new LoginPage(webDriver);
+        AfterLogin afterLogin = new AfterLogin(webDriver);
 
         homePage.navigateTo();
 
@@ -34,8 +35,8 @@ public class LikePost extends Main {
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
 
-        Assert.assertTrue(afterLogin.isPostLiked(), "The post is liked.");
         afterLogin.clickLikeButton();
+        Assert.assertTrue(afterLogin.isPostLiked(), "The post is liked.");
     }
 
     public boolean likedPost(WebElement likeButton) {
