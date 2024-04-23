@@ -10,7 +10,7 @@
             </class>
             <class name="Tests.FollowUser">
                 <methods>
-                    <include name="testFollowingCount"/>
+                    <include name="testFollowUser"/>
                 </methods>
             </class>
             <class name="Tests.LikePost">
@@ -20,19 +20,12 @@
             </class>
             <class name="Tests.UnfollowUser">
                 <methods>
-                    <include name="testUnfollowingSpecificUser"/>
+                    <include name="testUnfollowUser"/>
                 </methods>
             </class>
             <class name="Tests.UserLogin">
                 <methods>
-                    <include name="homePageScrollTest"/>
-                </methods>
-            </class>
-            <class name="Tests.UserLogout">
-                <methods>
-                    <include name="testUnfollowingSpecificUser"/>
-                    <include name="clickLogout"/>
-                    <include name="isUserLoggedOut"/>
+                    <include name="testUserLogin"/>
                 </methods>
             </class>
         </classes>

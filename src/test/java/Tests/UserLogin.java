@@ -1,21 +1,11 @@
 package Tests;
 
-import Pages.Header;
-import Pages.HomePage;
-import Pages.LoginPage;
+import Pages.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class UserLogin extends Main {
-
-    private final WebDriver webDriver;
-
-    public UserLogin(WebDriver driver) {
-        this.webDriver = driver;
-        PageFactory.initElements(this.webDriver, this);
-    }
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
@@ -23,11 +13,13 @@ public class UserLogin extends Main {
     }
 
     @Test(dataProvider = "getUser")
-    public void testFollowUser(String username, String password, String userId) {
-
-        HomePage homePage = new HomePage(driver);
-        Header header = new Header(driver);
-        LoginPage loginPage = new LoginPage(driver);
+    public void testUserLogin(String username, String password, String userId) {
+        WebDriver webDriver = super.getWebDriver();
+        HomePage homePage = new HomePage(webDriver);
+        Header header = new Header(webDriver);
+        LoginPage loginPage = new LoginPage(webDriver);
+        ProfilePage profilePage = new ProfilePage(webDriver);
+        LoginHeader loginHeader = new LoginHeader(webDriver);
 
         homePage.navigateTo();
         Assert.assertTrue(homePage.isUrlLoaded(), "Home page is not loaded");
@@ -41,11 +33,11 @@ public class UserLogin extends Main {
         loginPage.checkRememberMe();
         Assert.assertTrue(loginPage.isSelected(), "Remember me checkbox is not checked.");
 
-        loginPage.checkRememberMe();
-        Assert.assertTrue(homePage.isUrlLoaded(),"Home page is not loaded!");
+        loginPage.clickSignIn();
 
-        header.clickProfile();
-        Assert.assertTrue(loginPage.isUrlLoaded(), "Current page in not profile page for " + userId + " user");
+        loginHeader.clickHome();
+        Assert.assertTrue(profilePage.isUrlLoaded(), "Current page in not profile page for " + userId + " user");
 
+        Assert.assertTrue(profilePage.isUrlLoaded(), "Current page in not profile page");
     }
 }

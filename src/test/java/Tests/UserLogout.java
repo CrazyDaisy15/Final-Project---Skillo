@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import Pages.*;
 
 public class UserLogout extends Main {
-    private WebDriver driver;
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
@@ -16,11 +15,11 @@ public class UserLogout extends Main {
 
     @Test(dataProvider = "getUser")
     public void testUserLogout(String username, String password, String userId) {
-
-        HomePage homePage = new HomePage(driver);
-        Header header = new Header(driver);
-        LoginPage loginPage = new LoginPage(driver);
-        Logout logout = new Logout(driver);
+        WebDriver webDriver = super.getWebDriver();
+        HomePage homePage = new HomePage(webDriver);
+        Header header = new Header(webDriver);
+        LoginPage loginPage = new LoginPage(webDriver);
+        Logout logout = new Logout(webDriver);
 
         homePage.navigateTo();
 
@@ -33,7 +32,7 @@ public class UserLogout extends Main {
 
         Assert.assertTrue(homePage.isUrlLoaded(), "The user is NOT logged in."); {
         }
-        logout.clickLogoutButton();
+        logout.clickLogoutBtn();
 
         Assert.assertTrue(loginPage.isUrlLoaded(), "The user is NOT logged out.");
         String logoutMessageText = logout.getMessageModalText();

@@ -16,9 +16,9 @@ public class LoginPage {
     @FindBy(id = "defaultLoginFormUsername")
     private WebElement usernameTextField;
 
-    @FindBy(id = "defaultLoginFormPassword")
+    @FindBy(xpath = "//form/input[@id='defaultLoginFormPassword']")
     private WebElement passwordTextField;
-    @FindBy(className = "remember-me")
+    @FindBy(xpath = "//*[@class='remember-me']/input[@type='checkbox']")
     private WebElement rememberMeCheckbox;
     @FindBy(id = "sign-in-button")
     private WebElement signInButton;

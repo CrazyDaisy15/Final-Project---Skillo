@@ -19,10 +19,10 @@ public class AfterLogin {
     @FindBy(className = "app-post-modal")
     private WebElement modalDialog;
 
-    @FindBy(className = "like")
+    @FindBy(xpath = "//div[@class='post-modal-container']//*[@class='like far fa-heart fa-2x']")
     private WebElement likeButton;
 
-    @FindBy(className = "fa-thumbs-down")
+    @FindBy(xpath = "//div[@class='post-modal-container']//*[@class='fa-thumbs-down']")
     private WebElement dislikeButton;
 
     @FindBy(className = "ng-star-inserted")
@@ -34,10 +34,6 @@ public class AfterLogin {
     public void waitForDialogToAppear() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOf(modalDialog));
-    }
-
-    public void clickElement(WebElement element) {
-        element.click();
     }
 
     public void clickLikeButton() {

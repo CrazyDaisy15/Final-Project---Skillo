@@ -1,6 +1,8 @@
 package Pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,6 +16,8 @@ public class ProfilePage {
         this.webDriver = driver;
         PageFactory.initElements(driver, this);
     }
+    @FindBy(id = "nav-link-profile")
+    private WebElement profilePageLink;
 
     public boolean isUrlLoaded(){
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
@@ -22,5 +26,10 @@ public class ProfilePage {
     public boolean isUrlLoaded(String userId){
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.urlToBe(PAGE_URL+userId));
+    }
+    public void clickProfile() {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(this.profilePageLink));
+        this.profilePageLink.click();
     }
 }

@@ -21,7 +21,7 @@ public class Logout {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
-    public void clickLogoutButton() {
+    public void clickLogoutBtn() {
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
 
