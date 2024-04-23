@@ -19,10 +19,10 @@ public class AfterLogin {
     @FindBy(className = "app-post-modal")
     private WebElement modalDialog;
 
-    @FindBy(xpath = "//div[@class='post-modal-container']//*[@class='like far fa-heart fa-2x']")
+    @FindBy(xpath = "//app-all-posts//app-post-detail//div[@class=ng-star-inserted]/i[@class=far fa-heart fa-2x]")
     private WebElement likeButton;
 
-    @FindBy(xpath = "//div[@class='post-modal-container']//*[@class='fa-thumbs-down']")
+    @FindBy(className = "fa-thumbs-down")
     private WebElement dislikeButton;
 
     @FindBy(className = "ng-star-inserted")
@@ -34,6 +34,10 @@ public class AfterLogin {
     public void waitForDialogToAppear() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOf(modalDialog));
+    }
+
+    public void clickElement(WebElement element) {
+        element.click();
     }
 
     public void clickLikeButton() {
@@ -71,5 +75,43 @@ public class AfterLogin {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOf(unfollowUserBtn));
         return true;
+    }
+
+    public boolean followUser(WebElement followUserBtn) {
+        String buttonText = followUserBtn.getText();
+        if (buttonText.equals("Follow")) {
+            followUserBtn.click(); // Follow the user
+            return true;
+        } else if (buttonText.equals("Unfollow")) {
+            System.out.println("The user is not followed!");
+            return false;
+        } else {
+            return false;
+        }
+    }
+    public boolean unfollowUser(WebElement unFollowedUserBtn) {
+        String buttonText = unFollowedUserBtn.getText();
+        if (buttonText.equals("Follow")) {
+            return false;
+        } else if (buttonText.equals("Unfollow")) {
+            unFollowedUserBtn.click();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean dislikePost(WebElement dislikeButton) {
+        String initialClassName = dislikeButton.getAttribute("class");
+        dislikeButton.click();
+        String updatedClassName = dislikeButton.getAttribute("class");
+        return updatedClassName.contains("liked");
+    }
+
+    public boolean likedPost(WebElement likeButton) {
+        String initialClassName = likeButton.getAttribute("class");
+        likeButton.click();
+        String updatedClassName = likeButton.getAttribute("class");
+        return updatedClassName.contains("liked");
     }
 }

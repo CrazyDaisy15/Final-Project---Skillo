@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import Pages.*;
 
 public class FollowUser extends Main {
-
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
         return new Object[][]{{"CrazyDaisy15", "CrazyDaisy15", "5689"}};
@@ -33,18 +32,5 @@ public class FollowUser extends Main {
 
         Assert.assertTrue(afterLogin.isUserFollowed(), "The user is followed.");
         afterLogin.clickFollowUserBtn();
-    }
-
-    public boolean followUser(WebElement followUserBtn) {
-        String buttonText = followUserBtn.getText();
-        if (buttonText.equals("Follow")) {
-            followUserBtn.click(); // Follow the user
-            return true;
-        } else if (buttonText.equals("Unfollow")) {
-            System.out.println("The user is not followed!");
-            return false;
-        } else {
-            return false;
-        }
     }
 }

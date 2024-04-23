@@ -15,13 +15,16 @@ public class LoginPage {
 
     @FindBy(id = "defaultLoginFormUsername")
     private WebElement usernameTextField;
-
-    @FindBy(xpath = "//form/input[@id='defaultLoginFormPassword']")
+    @FindBy(id = "defaultLoginFormPassword")
     private WebElement passwordTextField;
     @FindBy(xpath = "//*[@class='remember-me']/input[@type='checkbox']")
     private WebElement rememberMeCheckbox;
     @FindBy(id = "sign-in-button")
     private WebElement signInButton;
+
+    public void navigateTo() {
+        this.webDriver.get(PAGE_URL);
+    }
 
     public LoginPage(WebDriver driver) {
         this.webDriver = driver;
@@ -29,35 +32,36 @@ public class LoginPage {
     }
 
     public boolean isUrlLoaded() {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         return wait.until(ExpectedConditions.urlToBe(PAGE_URL));
     }
 
     public void fillInUserName(String username) {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(usernameTextField));
         usernameTextField.sendKeys(username);
     }
 
     public void fillInPassword(String password) {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(passwordTextField));
         passwordTextField.sendKeys(password);
     }
 
     public void checkRememberMe() {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(rememberMeCheckbox));
         rememberMeCheckbox.click();
     }
 
-    public boolean isSelected() {
+    public boolean isCheckedRememberMe(){
         return rememberMeCheckbox.isSelected();
     }
 
     public void clickSignIn() {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(signInButton));
         signInButton.click();
     }
+
 }

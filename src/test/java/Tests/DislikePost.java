@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import Pages.*;
 
 public class DislikePost extends Main {
+    private WebDriver driver;
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
@@ -34,10 +35,4 @@ public class DislikePost extends Main {
         afterLogin.clickDislikeButton();
     }
 
-    public boolean dislikePost(WebElement dislikeButton) {
-        String initialClassName = dislikeButton.getAttribute("class");
-        dislikeButton.click();
-        String updatedClassName = dislikeButton.getAttribute("class");
-        return updatedClassName.contains("liked");
-    }
 }

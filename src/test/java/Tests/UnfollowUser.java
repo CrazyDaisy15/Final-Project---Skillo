@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import Pages.*;
 
 public class UnfollowUser extends Main {
+    private WebDriver driver;
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
@@ -33,17 +34,5 @@ public class UnfollowUser extends Main {
 
         Assert.assertTrue(afterLogin.isUserUnfollowed(), "The user is unfollowed.");
         afterLogin.clickUnfollowUserBtn();
-    }
-
-    public boolean unfollowUser(WebElement unFollowedUserBtn) {
-        String buttonText = unFollowedUserBtn.getText();
-        if (buttonText.equals("Follow")) {
-            return false;
-        } else if (buttonText.equals("Unfollow")) {
-            unFollowedUserBtn.click();
-            return true;
-        } else {
-            return false;
-        }
     }
 }

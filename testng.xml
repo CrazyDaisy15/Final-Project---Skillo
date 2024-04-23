@@ -1,33 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Users/HP/IdeaProjects/FinalProjectTestingSkilloWebsite">
-        <classes>
-            <class name="Tests.DislikePost">
-                <methods>
-                    <include name="testDislikePost"/>
-                </methods>
-            </class>
-            <class name="Tests.FollowUser">
-                <methods>
-                    <include name="testFollowUser"/>
-                </methods>
-            </class>
-            <class name="Tests.LikePost">
-                <methods>
-                    <include name="testLikePost"/>
-                </methods>
-            </class>
-            <class name="Tests.UnfollowUser">
-                <methods>
-                    <include name="testUnfollowUser"/>
-                </methods>
-            </class>
-            <class name="Tests.UserLogin">
-                <methods>
-                    <include name="testUserLogin"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<suite name="All Test Suite" verbose="1">
+        <test name="smoke">
+            <classes>
+                <class name="Tests.DislikePost"></class>
+                <class name="Tests.FollowUser"></class>
+                <class name="Tests.LikePost"></class>
+                <class name="Tests.UnfollowUser"></class>
+                <class name="Tests.UserLogin"></class>
+                <class name="Tests.UserLogout"></class>
+            </classes>
+        </test>
 </suite>

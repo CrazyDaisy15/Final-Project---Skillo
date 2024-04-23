@@ -6,13 +6,11 @@ import Pages.HomePage;
 import Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LikePost extends Main {
-
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
         return new Object[][]{{"CrazyDaisy15", "CrazyDaisy15", "5689"}};
@@ -35,14 +33,10 @@ public class LikePost extends Main {
         loginPage.checkRememberMe();
         loginPage.clickSignIn();
 
+        homePage.navigateTo();
+        Assert.assertTrue(homePage.isUrlLoaded(), "Home page is not loaded");
+
         afterLogin.clickLikeButton();
         Assert.assertTrue(afterLogin.isPostLiked(), "The post is liked.");
-    }
-
-    public boolean likedPost(WebElement likeButton) {
-        String initialClassName = likeButton.getAttribute("class");
-        likeButton.click();
-        String updatedClassName = likeButton.getAttribute("class");
-        return updatedClassName.contains("liked");
     }
 }
