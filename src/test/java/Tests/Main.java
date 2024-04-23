@@ -16,12 +16,15 @@ import java.time.Duration;
 
 public class Main {
     public static final String TEST_RESOURCES_DIR = "src\\test\\resources\\";
+    public static final String DOWNLOADS_DIR = TEST_RESOURCES_DIR.concat("downloads\\");
     public static final String SCREENSHOTS_DIR = TEST_RESOURCES_DIR.concat("screenshots\\");
+    public static final String REPORTS_DIR = TEST_RESOURCES_DIR.concat("reports\\");
     private WebDriver webDriver;
 
     @BeforeSuite
     protected final void setupTestSuite() throws IOException {
         cleanDirectory(SCREENSHOTS_DIR);
+        cleanDirectory(REPORTS_DIR);
         WebDriverManager.chromedriver().setup();
     }
 
@@ -37,6 +40,10 @@ public class Main {
     protected final void tearDownTest(ITestResult testResult) {
         takeScreenshot(testResult);
         quitDriver();
+    }
+    @AfterSuite
+    public void deleteDownloadFiles() throws IOException{
+        cleanDirectory(DOWNLOADS_DIR);
     }
 
     private void quitDriver() {
