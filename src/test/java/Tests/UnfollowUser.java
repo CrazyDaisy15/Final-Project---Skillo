@@ -1,14 +1,12 @@
 package Tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.*;
 
 public class UnfollowUser extends Main {
-    private WebDriver driver;
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {
