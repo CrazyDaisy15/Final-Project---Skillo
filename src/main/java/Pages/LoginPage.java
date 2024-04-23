@@ -50,7 +50,7 @@ public class LoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(rememberMeCheckbox));
         rememberMeCheckbox.click();
     }
-    public boolean isCheckedRememberMe(){
+    public boolean isCheckedRememberMe() {
         return rememberMeCheckbox.isSelected();
     }
 
