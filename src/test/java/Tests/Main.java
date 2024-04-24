@@ -16,7 +16,6 @@ import java.time.Duration;
 
 public class Main {
 
-    protected WebDriver webDriver;
     public static final String TEST_RESOURCES_DIR = "src\\test\\resources\\";
     public static final String SCREENSHOTS_DIR = TEST_RESOURCES_DIR.concat("screenshots" + File.separator);
     private WebDriver webDriver;
