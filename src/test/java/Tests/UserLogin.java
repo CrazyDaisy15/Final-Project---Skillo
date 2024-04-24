@@ -1,12 +1,9 @@
 package Tests;
 
-import Pages.Header;
-import Pages.HomePage;
-import Pages.LoginPage;
-import Pages.ProfilePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import Pages.*;
 
 public class UserLogin extends Main {
     @DataProvider(name = "getUser")

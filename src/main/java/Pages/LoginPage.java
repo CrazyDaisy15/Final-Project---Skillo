@@ -15,6 +15,7 @@ public class LoginPage {
 
     @FindBy(id = "defaultLoginFormUsername")
     private WebElement usernameTextField;
+
     @FindBy(id = "defaultLoginFormPassword")
     private WebElement passwordTextField;
     @FindBy(xpath = "//*[@class='remember-me']/input[@type='checkbox']")
@@ -52,16 +53,17 @@ public class LoginPage {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(rememberMeCheckbox));
         rememberMeCheckbox.click();
-    }
+  
 
-    public boolean isCheckedRememberMe(){
-        return rememberMeCheckbox.isSelected();
+   public boolean isCheckedRememberMe(){
+
+   return rememberMeCheckbox.isSelected();
     }
 
     public void clickSignIn() {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
-        signInButton.click();
+       WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
+       wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+       signInButton.click();
     }
 
 }

@@ -32,5 +32,4 @@ public class DislikePost extends Main {
         Assert.assertTrue(afterLogin.isPostDisliked(), "The post is disliked.");
         afterLogin.clickDislikeButton();
     }
-
 }

@@ -30,4 +30,5 @@ public class Logout {
         WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"toast-container\"]/div")));
         return message.getText();
     }
+
 }
