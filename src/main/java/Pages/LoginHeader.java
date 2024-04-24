@@ -31,11 +31,6 @@ public class LoginHeader {
         homeButton.click();
     }
 
-    public void clickLogoutButton() {
-        WebElement logoutButton = this.webDriver.findElement(By.xpath("//*[@id=\"navbarColor01\"]/ul[2]/li/a/i"));
-        logoutButton.click();
-    }
-
     public void clickNewPost() {
          WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(10));
          WebElement postLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-link-new-post")));
