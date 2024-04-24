@@ -36,6 +36,10 @@ public class AfterLogin {
         wait.until(ExpectedConditions.visibilityOf(modalDialog));
     }
 
+    public void clickElement(WebElement element) {
+        element.click();
+    }
+    
     public void clickLikeButton() {
         likeButton.click();
     }
