@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.*;
+
 public class LikePost extends Main {
     @DataProvider(name = "getUser")
     public Object[][] getUser() {

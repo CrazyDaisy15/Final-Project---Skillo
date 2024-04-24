@@ -31,7 +31,7 @@ public class UserLogout extends Main {
 
         Assert.assertTrue(homePage.isUrlLoaded(), "The user is NOT logged in."); {
         }
-        logout.clickLogoutBtn();
+        logout.clickLogoutButton();
 
         Assert.assertTrue(loginPage.isUrlLoaded(), "The user is NOT logged out.");
         String logoutMessageText = logout.getMessageModalText();

@@ -38,29 +38,32 @@ public class LoginPage {
     }
 
     public void fillInUserName(String username) {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(usernameTextField));
         usernameTextField.sendKeys(username);
     }
 
     public void fillInPassword(String password) {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(passwordTextField));
         passwordTextField.sendKeys(password);
     }
 
     public void checkRememberMe() {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(rememberMeCheckbox));
         rememberMeCheckbox.click();
-    }
-    public boolean isCheckedRememberMe() {
-        return rememberMeCheckbox.isSelected();
+  
+
+   public boolean isCheckedRememberMe(){
+
+   return rememberMeCheckbox.isSelected();
     }
 
     public void clickSignIn() {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
-        signInButton.click();
+       WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
+       wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+       signInButton.click();
     }
+
 }

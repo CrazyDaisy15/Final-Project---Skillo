@@ -104,7 +104,7 @@ public class AfterLogin {
         return updatedClassName.contains("liked");
     }
 
-    public boolean likePost(WebElement likeButton) {
+    public boolean likedPost(WebElement likeButton) {
         String initialClassName = likeButton.getAttribute("class");
         likeButton.click();
         String updatedClassName = likeButton.getAttribute("class");

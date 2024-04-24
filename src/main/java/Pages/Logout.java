@@ -22,7 +22,7 @@ public class Logout {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
-    public void clickLogoutBtn() {
+    public void clickLogoutButton() {
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
 
@@ -30,4 +30,5 @@ public class Logout {
         WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"toast-container\"]/div")));
         return message.getText();
     }
+
 }
