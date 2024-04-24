@@ -18,21 +18,17 @@ public class Main {
 
     protected WebDriver webDriver;
     public static final String TEST_RESOURCES_DIR = "src\\test\\resources\\";
-    public static final String DOWNLOADS_DIR = TEST_RESOURCES_DIR.concat("download" + File.separator);
     public static final String SCREENSHOTS_DIR = TEST_RESOURCES_DIR.concat("screenshots" + File.separator);
-    public static final String REPORTS_DIR = TEST_RESOURCES_DIR.concat("reports" + File.separator);
+    private WebDriver webDriver;
 
     @BeforeSuite
     protected final void setupTestSuite() throws IOException {
         cleanDirectory(SCREENSHOTS_DIR);
-        cleanDirectory(REPORTS_DIR);
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod
-
     protected final void setUpTest() {
-
         this.webDriver = new ChromeDriver();
         this.webDriver.manage().window().maximize();
         this.webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
@@ -44,6 +40,7 @@ public class Main {
         takeScreenshot(testResult);
         quitDriver();
     }
+    
     private void quitDriver() {
         if (this.webDriver != null) {
             this.webDriver.quit();
