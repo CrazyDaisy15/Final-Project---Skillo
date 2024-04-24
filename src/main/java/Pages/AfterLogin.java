@@ -36,10 +36,6 @@ public class AfterLogin {
         wait.until(ExpectedConditions.visibilityOf(modalDialog));
     }
 
-    public void clickElement(WebElement element) {
-        element.click();
-    }
-
     public void clickLikeButton() {
         likeButton.click();
     }
@@ -108,7 +104,7 @@ public class AfterLogin {
         return updatedClassName.contains("liked");
     }
 
-    public boolean likedPost(WebElement likeButton) {
+    public boolean likePost(WebElement likeButton) {
         String initialClassName = likeButton.getAttribute("class");
         likeButton.click();
         String updatedClassName = likeButton.getAttribute("class");

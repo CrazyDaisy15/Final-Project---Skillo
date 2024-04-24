@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import Pages.*;
 
 public class UnfollowUser extends Main {
+    // private WebDriver driver;
 
     @DataProvider(name = "getUser")
     public Object[][] getUser() {

@@ -16,12 +16,16 @@ public class LoginPage {
     @FindBy(id = "defaultLoginFormUsername")
     private WebElement usernameTextField;
 
-    @FindBy(xpath = "//form/input[@id='defaultLoginFormPassword']")
+    @FindBy(id = "defaultLoginFormPassword")
     private WebElement passwordTextField;
     @FindBy(xpath = "//*[@class='remember-me']/input[@type='checkbox']")
     private WebElement rememberMeCheckbox;
     @FindBy(id = "sign-in-button")
     private WebElement signInButton;
+
+    public void navigateTo() {
+        this.webDriver.get(PAGE_URL);
+    }
 
     public LoginPage(WebDriver driver) {
         this.webDriver = driver;
@@ -29,7 +33,7 @@ public class LoginPage {
     }
 
     public boolean isUrlLoaded() {
-        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         return wait.until(ExpectedConditions.urlToBe(PAGE_URL));
     }
 

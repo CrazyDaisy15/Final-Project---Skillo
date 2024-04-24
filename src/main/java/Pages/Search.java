@@ -23,15 +23,15 @@ public class Search {
         PageFactory.initElements(driver, this);
     }
     public void goToSearchField() {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(25));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(searchField)).click();
     }
     public void searchUser(String username) {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(25));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(searchField)).sendKeys(username);
     }
     public void waitForUserInDropdown() {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(25));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfAllElements(searchResults));
     }
     public void clickOnUser(int index) {
