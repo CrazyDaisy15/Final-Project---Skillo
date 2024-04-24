@@ -53,11 +53,10 @@ public class LoginPage {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(rememberMeCheckbox));
         rememberMeCheckbox.click();
-  
+    }
 
    public boolean isCheckedRememberMe(){
-
-   return rememberMeCheckbox.isSelected();
+        return rememberMeCheckbox.isSelected();
     }
 
     public void clickSignIn() {
@@ -65,5 +64,4 @@ public class LoginPage {
        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
        signInButton.click();
     }
-
 }
